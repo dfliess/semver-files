@@ -8,19 +8,19 @@ describe('lib/version/upgrade/enumerate', function () {
 
     it('should return an empty array for invalid directory', function () {
       const enumerate = new Enumerate('test/fixtures/version/invalid');
-        return enumerate.all().should.be.fulfilledWith([]);
+        return enumerate.all().should.be.eql([]);
     });
 
     it('should return an empty array if no version in directory', function () {
         const enumerate = new Enumerate('test/fixtures/version');
         return enumerate.all()
-            .should.be.fulfilledWith([]);
+            .should.be.eql([]);
     });
       
     it('should return an array of reverse sorted version files and not be recursive', function () {
         const enumerate = new Enumerate('test/fixtures/version/upgrade');
         return enumerate.all()
-            .should.be.fulfilledWith(['1.0.1', '1.0.0']);
+            .should.be.eql(['1.0.1', '1.0.0']);
     });
 
   });
@@ -28,17 +28,24 @@ describe('lib/version/upgrade/enumerate', function () {
   describe('#latest', function () {
     it('should return the highest version', function () {
       const enumerate = new Enumerate('test/fixtures/version/upgrade');
-      enumerate.latest().should.be.fulfilledWith('1.0.1');
+      enumerate.latest().should.be.eql('1.0.1');
+    });
+  });
+
+  describe('#first', function () {
+    it('should return the lowest version', function () {
+      const enumerate = new Enumerate('test/fixtures/version/upgrade');
+      enumerate.first().should.be.eql('1.0.0');
     });
   });
 
   describe('#map', function () {
-    it('should apply callback on all version items', function () {
+    it('should apply callback on all version items in Enumerate instance context', function () {
       const enumerate = new Enumerate('test/fixtures/version/upgrade');
       enumerate.map(function (item) {
-        return `passed ${item}`
+        return `passed ${item} ${this.latest()}`
       })
-      .should.be.fulfilledWith(['passed 1.0.1', 'passed 1.0.0']);
+      .should.be.eql(['passed 1.0.1 1.0.1', 'passed 1.0.0 1.0.1']);
     });
   });
 });
