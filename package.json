@@ -1,0 +1,21 @@
+{
+  "name": "mod-ms-version-mongo",
+  "description": "A mongodb database migration module",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+      "mongoose": "^4.12.5",
+      "semver-sort":"^0.0.4",
+      "compare-semver": "^1.1.0",
+      "glob-fs": "^0.1.7"
+  },
+  "devDependencies": {
+    "mocha": "^3.5.3",
+    "should": "^13.1.3"
+  }
+
+}
