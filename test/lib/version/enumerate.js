@@ -1,8 +1,8 @@
 const should = require('should');
-const basedir = `${__dirname}/../../../..`;
+const basedir = `${__dirname}/../../..`;
 
 describe('lib/version/upgrade/enumerate', function () {
-  const Enumerate = require(`${basedir}/lib/version/upgrade/enumerate.js`);
+  const Enumerate = require(`${basedir}/lib/version/enumerate.js`);
 
   describe('#all', function () {
 
