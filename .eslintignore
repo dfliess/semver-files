@@ -1,0 +1,5 @@
+examples/*
+config/*
+node_modules/
+!config/settings.js
+test/mocha.js
