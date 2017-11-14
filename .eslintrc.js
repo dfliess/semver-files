@@ -14,9 +14,6 @@ module.exports = {
       'objects': 'ignore',
       'exports': 'never',
       'imports': 'never'
-    }],
-    'import/no-unresolved': ['error', {
-      ignore: ['\/config\/notifier\.js$']
     }]
   },
   'overrides': [
