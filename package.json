@@ -1,18 +1,37 @@
 {
   "name": "semver-files",
+  "version": "0.0.0",
   "description": "A node module to list version files named with semantic version pattern",
+  "keywords": [
+      "semver", 
+      "version", 
+      "file", 
+      "filesystem", 
+      "pattern", 
+      "regexp"
+  ],
   "homepage": "https://github.com/francisek/semver-files",
   "main": "lib/semver-files.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "preversion": "npm test"
   },
-  "author": "Francisek",
+  "author": {
+      "name": "Francisek",
+      "url": "https://github.com/francisek"
+  }, 
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/francisek/semver-files"
+    "url": "git+https://github.com/francisek/semver-files.git"
   },
-
+  "directories": {
+      "lib": "./lib",
+      "test": "./test"
+  },
+  "config": {
+      "message": "Tagged to %s by NPM"
+  },
   "dependencies": {
     "compare-semver": "^1.1.0",
     "glob-fs": "^0.1.7",
