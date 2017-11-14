@@ -42,7 +42,13 @@ console.log(semver).latest();
 console.log(semver.map(function formatCallback(item) {
     return `${item}, latest is ${this.latest()}`;
 }));
-//=> [ '1.0.1, latest is 1.0.1', '1.0.0, latest is 1.0.1' ] 
+//=> [ '1.0.1, latest is 1.0.1', '1.0.0, latest is 1.0.1' ]
+
+console.log(semver.getPath('1.0.0'));
+//=> 'version/1.0.0.js'
+
+console.log(semver.getPaths());
+//=> { '1.0.0': 'version/1.0.0.js', '1.0.1': 'version/1.0.1.js' }
 ```
 
 ## API
@@ -79,6 +85,14 @@ Return the highest version number.
 
 Return the least version number.
 
-#### map(callback)
+#### map(callback): Array
 
 Apply a callback on all version items in the context of the ServerFiles instance.
+
+#### getPath(version): String|null
+
+Return the relative path of the file matching the version or null.
+
+#### getPaths(): String|null
+
+Return an object of the relative path of al the version files. Order is not guarantee.

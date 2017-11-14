@@ -1,4 +1,4 @@
-require('should');
+const should = require('should');
 
 const basedir = `${__dirname}/../..`;
 
@@ -57,6 +57,34 @@ describe('lib/version/upgrade/enumerate', () => {
         return `passed ${item} ${this.latest()}`;
       })
         .should.be.eql(['passed 1.0.1 1.0.1', 'passed 1.0.0 1.0.1']);
+    });
+  });
+
+  describe('#getPath', () => {
+    it('should return the file relative path for a matching file version', () => {
+      const enumerate = new Enumerate('test/fixtures/version');
+      enumerate.getPath('1.0.1')
+        .should.be.eql('test/fixtures/version/1.0.1.js');
+    });
+    it('should return null for a non existing file version', () => {
+      const enumerate = new Enumerate('test/fixtures/version');
+      should(enumerate.getPath('1.0.5')).be.null();
+    });
+  });
+
+  describe('#getPaths', () => {
+    it('should return an object of file relative paths for all matching files', () => {
+      const enumerate = new Enumerate('test/fixtures/version');
+      enumerate.getPaths()
+        .should.be.eql({
+          '1.0.0': 'test/fixtures/version/1.0.0.js',
+          '1.0.1': 'test/fixtures/version/1.0.1.js',
+        });
+    });
+    it('should return an empty object when no file match', () => {
+      const enumerate = new Enumerate('test/fixtures');
+      enumerate.getPaths()
+        .should.be.eql({});
     });
   });
 });

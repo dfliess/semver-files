@@ -1,6 +1,6 @@
 {
   "name": "semver-files",
-  "description": "A file locator for semver-named files",
+  "description": "A node module to list version files named with semantic version pattern",
   "homepage": "https://github.com/francisek/semver-files",
   "main": "lib/semver-files.js",
   "scripts": {
