@@ -34,6 +34,29 @@ describe('lib/version/upgrade/enumerate', () => {
       return enumerate.all()
         .should.be.eql(['1.0.3', '1.0.0', '1.0.0-RC2', '1.0.0-RC1']);
     });
+
+    it('should return an array of reverse sorted version only of files with .txt extension', () => {
+      const enumerate = new Enumerate(
+        'test/fixtures/version',
+        {
+          extPattern: '\\.txt'
+        }
+      );
+      return enumerate.all()
+        .should.be.eql(['1.0.2', '1.0.0']);
+    });
+
+    it('should return an array of reverse sorted version only of files with .txt or .js extension', () => {
+      const enumerate = new Enumerate(
+        'test/fixtures/version',
+        {
+          extPattern: '\\.(txt|js)'
+        }
+      );
+      return enumerate.all()
+        .should.be.eql(['1.0.2','1.0.1','1.0.0']);
+    });
+
   });
 
   describe('#latest', () => {
@@ -86,5 +109,24 @@ describe('lib/version/upgrade/enumerate', () => {
       enumerate.getPaths()
         .should.be.eql({});
     });
+
+    it('should return an object of file relative paths for all matching files with .txt or .js extension, with more than one it choose alphabetically', () => {
+      const enumerate = new Enumerate(
+        'test/fixtures/version',
+        {
+          extPattern: '\\.(txt|js)'
+        }
+      );
+      return enumerate.getPaths()
+        .should.be.eql(
+          {
+            '1.0.0': 'test/fixtures/version/1.0.0.js',
+            '1.0.1': 'test/fixtures/version/1.0.1.js',
+            '1.0.2': 'test/fixtures/version/1.0.2.txt',
+          }
+        );
+    });
+
   });
+
 });
